@@ -1,0 +1,136 @@
+from sense_hat import SenseHat
+import time
+
+"""
+
+  Sense HAT Sensors Display
+  
+  Select Temperature, Pressure, or Humidity  with the Joystick
+  to visualize the current sensor values on the LED.
+  
+  Note: Requires sense_hat 2.2.0 or later
+
+"""
+
+sense = SenseHat()
+
+
+white = (255, 255, 255)
+black = (0, 0, 0)
+
+def show_S():
+  sense.show_letter("S", back_colour = black)
+  time.sleep(.75)
+
+def show_H():
+  sense.show_letter("H", back_colour = black)
+  time.sleep(.75)
+
+def show_I():
+  sense.show_letter("I", back_colour = black)
+  time.sleep(.75)
+  
+def show_N():
+   sense.show_letter("N", back_colour = black)
+   time.sleep(.75)
+  
+def show_E():
+   sense.show_letter("E", back_colour = black)
+   time.sleep(.75)
+  
+def show_X():
+  sense.show_letter("X", back_colour = black)
+  time.sleep(.75)
+  
+def update_screen(mode, show_letter = False):
+  if mode == "temp":
+    if show_letter:
+      show_S()
+    temp = sense.temp
+    temp_value = temp / 2.5 + 16
+    
+
+  elif mode == "pressure":
+    if show_letter:
+      show_H()
+    pressure = sense.pressure
+    pressure_value = pressure / 20
+    
+
+  elif mode == "humidity":
+    if show_letter:
+      show_I()
+    humidity = sense.humidity
+    humidity_value = 64 * humidity / 100
+    
+    
+  elif mode == "temp":
+    if show_letter:
+      show_N()
+    temp = sense.temp
+    temp_value = temp / 2.5 + 16
+    
+  elif mode == "pressure":
+    if show_letter:
+      show_E()
+    pressure = sense.pressure
+    pressure_value = pressure / 20
+    
+  elif mode == "humidity":
+    if show_letter:
+      show_X()
+    humidity = sense.humidity 
+    humidity_value = 64 * humidity / 100
+    
+####
+# Intro Animation
+####
+
+show_S()
+show_H()
+show_I()
+show_N()
+show_E()
+show_X()
+
+update_screen("temp")
+
+index = 0
+sensors = ["temp", "pressure", "humidity"]
+
+from sense_hat import SenseHat
+import time
+
+s = SenseHat()
+s.low_light = True
+
+white = (255,255,255)
+black = (0, 0, 0)
+pink = (255, 51, 204)
+orange = (255, 153, 0)
+
+def butterfly_logo():
+    B = black
+    O = orange
+    P = pink
+    W = white
+    logo = [
+    W, W, W, W, W, W, W, W, 
+    W, W, B, W, B, W, W, W,
+    O, O, W, B, W, O, O, W, 
+    O, P, O, B, O, P, O, W,
+    O, O, P, B, P, O, O, W,
+    W, W, P, B, P, W, W, W,
+    W, W, W, B, W, W, W, W,
+    W, W, W, W, W, W, W, W,
+    ]
+    return logo
+    
+
+images = [ butterfly_logo, butterfly_logo]
+count = 0
+
+while True: 
+    s.set_pixels(images[count % len(images)]())
+    time.sleep(5.75)
+    count += 1
